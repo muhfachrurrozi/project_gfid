@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'dept',
+        'jabatan',
+        'telepon',
+        'alamat',
+        'poto',
     ];
 
     /**
@@ -42,4 +47,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    protected function dept(): Attribute{
+        return new Attribute(
+            get: fn ($value) => ["admin","pm","fab","ext","qc","wrh","ts"][$value],
+        );
+    }
+
+    protected function jabatan(): Attribute{
+        return new Attribute(
+        get: fn ($value) => ["admin","user","foreman","supervisor","manager"][$value],
+        );
+    }
 }
