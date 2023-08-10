@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('mesins', function (Blueprint $table) {
             $table->id();
+            $table->string('aset');
+            $table->string('name');
+            $table->string('label');
+            $table->string('spek');
+            $table->string('wi');
             $table->timestamps();
         });
     }

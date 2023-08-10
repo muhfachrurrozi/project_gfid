@@ -26,7 +26,7 @@
 
     <div class="col-12 p-2 grid row-gap-2">
         <!-- Large modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#input-karyawan">Tambah Data</button><br>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inputKaryawan">Tambah Data</button><br>
     </div>
 
     <section class="section dashboard">
@@ -77,26 +77,25 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->telepon }}</td>
                                             <td>
-                                                <a class="nav-link nav-profile d-flex pe-2" href="#" data-bs-toggle="dropdown" data-bs-toggle="tooltip" data-bs-placement="right" title="Infomasi Data">
-                                                    <strong>
-                                                        <button type="button" class="btn btn-outline-primary"><i class="bi bi-info-lg"></i></button>
-                                                    </strong>
+                                                <a class="" href="{{ route('users.show', $user->id) }}" data-bs-toggle="tooltip" title="Default tooltip">
+                                                    <span class="btn btn-outline-primary"><i class="bi bi-info-lg"></i></span>
                                                 </a>
-                                                <ul class="dropdown-menu dropdown-menu-end">
-                                                    <li class="">
-                                                        <a class="dropdown-item" href="{{ route('users.show', $user->id) }}" data-bs-toggle="tooltip" title="Default tooltip">
-                                                            <span class="btn btn-outline-success"><i class="bi bi-eye"></i></span>
-                                                        </a>
-                                                        {{-- <a class="dropdown-item" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Edit Data">
-                                                            <span class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></span>
-                                                        </a> --}}
-                                                        <a class="dropdown-item" href="#">
-                                                            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="{{ '#hapusKaryawan', $user->id }}">
-                                                                <i class="bi bi-trash"></i>
-                                                            </button>
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                                <button type="button" class="btn btn-outline-danger delete-btn" data-id="{{ $user->id }}"><i class="bi bi-trash"></i></button>
+                                                {{-- <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <button type="submit" class="btn btn-outline-danger conformDelete"><i class="bi bi-trash"></i></button>
+                                                </form> --}}
+                                                {{-- <a class="hapusKaryawan" href="#" id="{{ $user->id }}">
+                                                    <span class="btn btn-outline-danger"><i class="bi bi-trash"></i></span>
+                                                </a> --}}
+
+                        {{-- <form method="POST" action="{{ route('users.delete', $user->id) }}">
+                            @csrf
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button type="submit" class="btn btn-outline-danger show_confirm" data-toggle="tooltip" title='Delete'><i class="bi bi-trash"></i></button>
+                        </form> --}}
                                             </td>
                                         </tr>
                                         @endforeach
@@ -113,7 +112,7 @@
         <!-- ======= Footer ======= -->
         <footer id="footer" class="footer">
             <div class="copyright">
-                &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>Muh Fachrurrozi</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
@@ -128,7 +127,7 @@
 
 
 <!-- Modal Input Karyawan -->
-<div class="modal fade" id="input-karyawan" tabindex="-1">
+<div class="modal fade" id="inputKaryawan" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -189,7 +188,7 @@
                         <label for="inputNumber" class="form-label">File Upload</label>
                         <div class="text-center">
                             <div class="col-sm-10">
-                                <input class="form-control" type="file" id="poto" name="poto">
+                                <input class="form-control" type="file" id="poto" name="poto" accept="image/jpeg,image/gif,image/png">
                             </div>
                         </div>
                     </div>
@@ -205,32 +204,48 @@
 </div>
 <!-- End Modal Input Karyawan -->
 
-<!-- Modal Hapus Karyawan -->
-<div class="modal fade" id="{{ 'hapusKaryawan', $user->id }}" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Konfirmasi Hapus</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="d-flex justify-center align-center">
-                    <i class="bi bi-exclamation-triangle-fill" style="font-size: 100px; position: center"></i>
-                </div>
-                <p>Anda yakin ingin menghapus data ini?</p>
-            </div>
-            <div class="modal-footer">
-                <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Hapus</button>
-                </form>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Modal Hapus Karyawan -->
+<script>
+    // Ketika tombol hapus di klik
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteButtons = document.querySelectorAll('.delete-btn');
 
+        deleteButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+
+                // Tampilkan SweetAlert untuk konfirmasi hapus
+                Swal.fire({
+                    title: 'Konfirmasi',
+                    text: 'Anda yakin ingin menghapus data ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Hapus',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Jika pengguna mengonfirmasi hapus, kirimkan permintaan hapus menggunakan metode DELETE
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = '/users/' + id;
+                        const csrfField = document.createElement('input');
+                        csrfField.type = 'hidden';
+                        csrfField.name = '_token';
+                        csrfField.value = '{{ csrf_token() }}';
+                        const methodField = document.createElement('input');
+                        methodField.type = 'hidden';
+                        methodField.name = '_method';
+                        methodField.value = 'DELETE';
+
+                        form.appendChild(csrfField);
+                        form.appendChild(methodField);
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
 @endsection

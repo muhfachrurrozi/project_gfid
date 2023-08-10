@@ -72,7 +72,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('users\detail',['user' => $user]);
+        return view('users.detail',['user' => $user]);
     }
 
     /**
@@ -89,27 +89,22 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nik' => 'required|unique:users',
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
             'dept' => 'required',
             'jabatan' => 'required',
             'telepon' => 'required',
             'alamat' => 'required',
         ]);
 
-        $user = User::findOrFail($id);
+        $upUser = User::findorfail($id);
 
-
-        $user->nik = $request->get('nik');
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->password = Hash::make($request->get('password'));
-        $user->dept = $request->get('dept');
-        $user->jabatan = $request->get('jabatan');
-        $user->telepon = $request->get('telepon');
-        $user->alamat = $request->get('alamat');
+        $upUser->name = $request->get('name');
+        $upUser->email = $request->get('email');
+        $upUser->dept = $request->get('dept');
+        $upUser->jabatan = $request->get('jabatan');
+        $upUser->telepon = $request->get('telepon');
+        $upUser->alamat = $request->get('alamat');
 
         // Periksa apakah ada file gambar yang diunggah
         if($request->hasFile('poto')){
@@ -123,17 +118,17 @@ class UserController extends Controller
             $request->poto->move(public_path('avatar'),$fileName);
 
             // Hapus poto lama jika ada
-            if($user->poto){
-                $oldImagePath = public_path('avatar/'.$user->poto);
+            if($upUser->poto){
+                $oldImagePath = public_path('avatar/'.$upUser->poto);
                 if(file_exists($oldImagePath)){
                     unlink($oldImagePath);
                 }
             }
 
-            $user->poto = $fileName;
+            $upUser->poto = $fileName;
         }
 
-        $user->save();
+        $upUser->save();
 
         return redirect()->route('users.show', [$id])->with('edit', 'Karyawan berhasil diedit');
     }
