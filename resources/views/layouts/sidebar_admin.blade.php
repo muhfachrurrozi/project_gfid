@@ -478,9 +478,9 @@
         </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>F.A.Q</span>
+            <a class="nav-link collapsed" href="{{ route('customers.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Data Customer">
+                <i class="bi bi-journal-text"></i>
+                <span>Customer</span>
             </a>
         </li><!-- End F.A.Q Page Nav -->
 
