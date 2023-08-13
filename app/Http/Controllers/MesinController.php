@@ -61,7 +61,7 @@ class MesinController extends Controller
         $nmesin->save();
 
         return redirect()->route('mesins.index')
-                ->with('Succcess', 'Mesin berhasil ditambahkan');
+                ->with('succcess', 'Mesin berhasil ditambahkan');
     }
 
     /**
@@ -115,7 +115,7 @@ class MesinController extends Controller
 
         $umesin->save();
 
-        return redirect()->route('mesins.index')->with('success', 'Data mesin berhasil diperbarui.');
+        return redirect()->route('mesins.index')->with('success', 'Data mesin berhasil diperbaharui.');
         // dd($request->all());
         // $request->validate([
         //     'aset' => 'required|unique:mesins',

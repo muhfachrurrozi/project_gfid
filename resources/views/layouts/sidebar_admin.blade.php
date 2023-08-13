@@ -434,8 +434,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="icons-remix.html">
-                        <i class="bi bi-circle"></i><span>Remix Icons</span>
+                    <a href="{{ route('produks.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Data Produks">
+                        <i class="bi bi-circle"></i><span>Produk</span>
                     </a>
                 </li>
                 <li>

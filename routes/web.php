@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MesinController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,7 +100,7 @@ Route::middleware(['auth', 'user-access:admin', 'user-access:admin'])->group(fun
 
     Route::get('/admin/index', [HomeController::class, 'adminHome'])->name('admin.index');
     Route::resource('users', UserController::class);
-    Route::resource('products', ProductController::class);
+    Route::resource('produks', ProdukController::class);
     Route::resource('mesins', MesinController::class);
     Route::resource('customers', CustomerController::class);
     Route::resource('orders', OrderController::class);
