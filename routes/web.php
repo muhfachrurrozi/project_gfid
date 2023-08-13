@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MesinController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ScrapController;
 
 /*
 |--------------------------------------------------------------------------

@@ -434,8 +434,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('produks.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Data Produks">
+                    <a href="{{ route('produks.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Data Produk">
                         <i class="bi bi-circle"></i><span>Produk</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('scraps.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Data Scrap">
+                        <i class="bi bi-circle"></i><span>Scrap Fabrikasi</span>
                     </a>
                 </li>
                 <li>
