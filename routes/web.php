@@ -8,6 +8,7 @@ use App\Http\Controllers\MesinController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ScrapController;
+use App\Http\Controllers\StokController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +107,7 @@ Route::middleware(['auth', 'user-access:admin', 'user-access:admin'])->group(fun
     Route::resource('customers', CustomerController::class);
     Route::resource('orders', OrderController::class);
     Route::resource('scraps', ScrapController::class);
+    Route::resource('stoks', StokController::class);
     Route::resource('grns', GrnController::class);
     Route::get('grns/printgrn', [GrnController::class, 'generatePDF'])->name('grns.printgrn');
     Route::resource('passqcs', QcpassController::class);

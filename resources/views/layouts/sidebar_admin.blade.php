@@ -444,6 +444,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('stoks.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Data Scrap">
+                        <i class="bi bi-circle"></i><span>Equitment Stock Fabrikasi</span>
+                    </a>
+                </li>
+                <li>
                     <a href="icons-boxicons.html">
                         <i class="bi bi-circle"></i><span>Boxicons</span>
                     </a>
